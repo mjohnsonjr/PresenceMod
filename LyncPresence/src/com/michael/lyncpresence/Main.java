@@ -59,7 +59,7 @@ public class Main implements IXposedHookLoadPackage {
         		@Override //I'm in the com.microsoft.lync view here.
         		protected void afterHookedMethod(final MethodHookParam param) throws Throwable {	
 				
-        			   if( alarmIntent != null ){
+        			   if( alarmIntent != null && alarm != null ){
         					alarm.cancel( alarmIntent );
         			   }
         			   
@@ -73,7 +73,7 @@ public class Main implements IXposedHookLoadPackage {
 //						i.putExtra("activityMonitor", Main.activityMonitorClass  );
 						
 						alarmIntent = PendingIntent.getBroadcast( context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT );
-						alarm.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 2000L, 20000L, alarmIntent);
+						alarm.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 200L, 60000L, alarmIntent);
 						Log.d( "Lync", "Started...Done." );
     			}
         	});
